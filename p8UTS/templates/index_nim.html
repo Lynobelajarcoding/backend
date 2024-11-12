@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Buku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #fcc201;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653b0;
+        }
+        .table {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table tbody tr {
+            background-color: #e9ecef; /* Light grey background for all rows */
+        }
+        .table-hover tbody tr:hover {
+            background-color: #d6d8db; /* Slightly darker grey on hover */
+            cursor: pointer;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: white;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #9e1a1a;
+            border-color: #bd2130;
+        }
+        .btn-sm {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Daftar Buku</h1>
+        
+        <a href="/tambah" class="btn btn-primary mb-3">Tambah Buku</a>
+        
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Kode Buku</th>
+                    <th>Nama Buku</th>
+                    <th>Penerbit</th>
+                    <th>Pengarang</th>
+                    <th>Jumlah Buku</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book[0] }}</td>
+                    <td>{{ book[1] }}</td>
+                    <td>{{ book[2] }}</td>
+                    <td>{{ book[3] }}</td>
+                    <td>{{ book[4] }}</td>
+                    <td>
+                        <a href="/edit/{{ book[0] }}" class="btn btn-warning btn-sm me-2">Edit</a>
+                        <a href="/hapus/{{ book[0] }}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">Hapus</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
