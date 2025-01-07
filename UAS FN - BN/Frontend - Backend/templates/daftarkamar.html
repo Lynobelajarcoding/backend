@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Kamar</title>
+    <style>
+        body {
+            background-color: aquamarine;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: red;
+        }
+        input[type="text"] {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #333;
+        }
+        button {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #C70039;
+        }
+        .room-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .room-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 10px;
+            width: 300px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .room-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .room-info {
+            padding: 10px;
+            width: 100%;
+        }
+        .room-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .room-details {
+            font-size: 1em;
+            color: #555;
+        }
+        .detail-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .detail-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        const gambarKamar = ["kamar1.jpg", "kamar2.jpg", "kamar3.jpg", "kamar4.jpg", "kamar5.jpg", "kamar6.jpg"]; // Daftar gambar
+
+        function ambilGambarAcak() {
+            return gambarKamar[Math.floor(Math.random() * gambarKamar.length)];
+        }
+
+        function tambahKamar() {
+            var nama_kamar = document.getElementById("nama_kamar").value;
+            var container = document.getElementById("room_container");
+
+            var card = document.createElement("div");
+            card.className = "room-card";
+
+            var img = document.createElement("img");
+            var randomImage = ambilGambarAcak();
+            img.src = randomImage;
+            img.alt = nama_kamar;
+
+            var info = document.createElement("div");
+            info.className = "room-info";
+
+            var name = document.createElement("div");
+            name.className = "room-name";
+            name.innerHTML = nama_kamar;
+
+            var details = document.createElement("div");
+            details.className = "room-details";
+            details.innerHTML = "Ukuran kamar: 18 m²/194 ft²<br>Pemandangan: Kota<br>2 kasur single";
+
+            var detailButton = document.createElement("button");
+            detailButton.className = "detail-button";
+            detailButton.innerHTML = "Lihat Detail";
+            detailButton.onclick = function() {
+                window.location.href = "detail.html?nama=" + nama_kamar.toLowerCase() + "&gambar=" + randomImage; // Redirect to detail page with room name and image
+            };
+
+            info.appendChild(name);
+            info.appendChild(details);
+            card.appendChild(img);
+            card.appendChild(info);
+            card.appendChild(detailButton);
+            container.appendChild(card);
+        }
+    </script>
+</head>
+<body>
+    <h1>Daftar Kamar</h1>
+    Nama Kamar: <input type="text" id="nama_kamar" value="">
+    <button id="tambah" onclick="tambahKamar()">Tambah Kamar</button>
+    <div id="room_container" class="room-container">
+        {% for room in rooms %}
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        <div class="room-card">
+            <img src="{{ url_for('static', filename='images/' + room['image']) }}" alt="{{ room['name'] }}">
+            <div class="room-info">
+                <div class="room-name">{{ room['name'] }}</div>
+                <div class="room-details">{{ room['details'] }}</div>
+            </div>
+            <button class="detail-button" onclick="window.location.href='{{ url_for('detail', nama=room['name']) }}'">Lihat Detail</button>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
